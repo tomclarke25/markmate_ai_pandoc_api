@@ -76,5 +76,6 @@ func main() {
 	handler := c.Handler(r)
 
 	log.Println("Listening on port 443")
-	log.Fatal(http.ListenAndServeTLS(":443", "cert.pem", "key.pem", handler))
+	log.Fatal(http.ListenAndServeTLS(":443", "/etc/ssl/certs/selfsigned.crt", "/etc/ssl/private/selfsigned.key", handler))
+
 }
