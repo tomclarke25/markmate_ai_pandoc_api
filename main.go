@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 const (
@@ -62,7 +63,18 @@ func ConvertMarkdownToDocx(markdown string) ([]byte, error) {
 
 func main() {
 	r := mux.NewRouter()
-	log.Println("Listening on port 8080")
 	r.HandleFunc("/", handler).Methods("POST")
-	log.Fatal(http.ListenAndServe(":8080", r))
+
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"}, // Replace with the port you're using
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
+		Debug:            true,
+	})
+
+	handler := c.Handler(r)
+
+	log.Println("Listening on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", handler))
 }
