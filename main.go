@@ -75,6 +75,6 @@ func main() {
 
 	handler := c.Handler(r)
 
-	log.Println("Listening on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", handler))
+	log.Println("Listening on port 443")
+	log.Fatal(http.ListenAndServeTLS(":443", "cert.pem", "key.pem", handler))
 }
