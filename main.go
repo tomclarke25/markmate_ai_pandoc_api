@@ -66,7 +66,7 @@ func main() {
 	r.HandleFunc("/", handler).Methods("POST")
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"}, // Replace with the port you're using
+		AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Authorization", "Content-Type"},
 		AllowCredentials: true,
